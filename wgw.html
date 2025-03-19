@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Financial Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1c3643, #275d7a); /* Deeper gradient */
+            color: #e0f7fa; /* Light, softer text color */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Animated Text Background */
+        .animated-bg-text {
+            position: relative;
+            overflow: hidden;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .animated-bg-text h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #fffde7; /* Light yellow/cream color */
+            margin: 0;
+            padding: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1; /* Ensure text is above the background */
+        }
+
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 200% 200%;
+            animation: animatedGradient 5s linear infinite;
+            z-index: 0;
+            border-radius: 8px;
+        }
+
+        @keyframes animatedGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ff9800;
+            color: white;
+            padding: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* More prominent shadow */
+            z-index: 1000; /* Ensure it's on top */
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #f57c00;
+            transform: scale(1.05);
+        }
+
+        #chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 380px; /* Slightly wider */
+            background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+            padding: 25px;
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+            backdrop-filter: blur(15px); /* Stronger blur */
+            z-index: 999;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        #chatbox {
+            height: 350px; /* Taller chatbox */
+            overflow-y: auto;
+            text-align: left;
+            color: #e0f7fa;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2); /* Darker background for chatbox */
+            margin-bottom: 15px;
+        }
+
+        #chatbox p {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        #chatbox strong {
+            color: #b3e5fc;
+        }
+
+        #chat-popup input, #chat-popup button {
+            width: calc(100% - 24px); /* Adjust for padding */
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1em;
+        }
+
+        #chat-popup input {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #e0f7fa;
+        }
+
+        #chat-popup input::placeholder {
+            color: #b3e5fc;
+        }
+
+        #chat-popup button {
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #chat-popup button:hover {
+            background: #f57c00;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #e68900;
+        }
+   </style>
+</head>
+<body>
+    <header class="custom-header">
+        <h1 id="heading" style="transform: translateY(0px); opacity: 1;">𝘈 𝘓 𝘗 𝘏 𝘈 𝘉 𝘜 𝘊 𝘒 𝘚</h1>
+        <p id="heading" style="transform: translateY(0px); opacity: 1;">𝑰𝒏𝒗𝒆𝒔𝒕 𝑳𝒊𝒌𝒆 𝒂𝒏 𝑨𝒍𝒑𝒉𝒂, 𝑬𝒂𝒓𝒏 𝑳𝒊𝒌𝒆 𝒂 𝑩𝒐𝒔𝒔</p>
+        <div class="header-top">
+            <img src="/nn.jpg" alt="Financial Logo" class="logo">
+            <div class="search-bar">
+                <input type="text" placeholder="search" autofocus>
+                <button>🔍</button>
+            </div>
+            <div class="market-info">
+                <span>Nifty 50: <strong>22,834.30</strong> <span class="up">▲ 325.55 (1.45%)</span></span>
+                <span>Market Cap: ₹397.28 L Cr | $4.58 T</span>
+            <div style="display: flex; justify-content: center;">
+                    <form action="/login" method="POST" class="login-container">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                   
+                        <label for="email">Email ID:</label>
+                        <input type="email" id="email" name="email" required>
+                   
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                   
+                        <button type="submit">Login</button>
+                        <p style="margin-top: 10px; font-size: 0.8em;">Don't have an account? <a href="#" style="color: #ff9800;">Sign up</a></p>
+                    </form>
+             </div>
+    </header>
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Market Data</a></li>
+            <li><a href="#">Invest</a></li>
+            <li><a href="#">Trade</a></li>
+            <li><a href="#">Regulation</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</body>
+        <style>
+            .custom-header {
+            background: linear-gradient(90deg, #0f151b, #063941);/* Slightly transparent background */
+            padding: 20px 30px; /* More horizontal padding */
+            color: #b3d0fc; /* Lighter header text */
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            position: relative; /* For potential absolute positioning of elements */
+        }
+
+        .header-top {
+            background: linear-gradient(90deg, #10151d, #061e22); /* Slightly transparent background */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            height: 100px; /* Adjust logo size */
+            margin-right: 15px;
+        }
+
+       
+        .search-bar {
+            display: flex;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            width: 400px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: #febd69;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .search-bar button:hover {
+            background-color: #ffa837;
+        }
+
+        .market-info {
+            font-size: 0.9em;
+            color: #81d4fa;
+        }
+
+        .market-info strong {
+            color: #b3e5fc;
+        }
+
+        .up {
+            color: #66bb6a; /* Green for positive change */
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+        }
+
+        .nav-menu li {
+            margin: 0 20px;
+        }
+
+        .nav-menu a {
+            color: #b3e5fc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #fff;
+        }
+        .login-container {
+             position: absolute;
+             top: 60px; /* Adjust as needed to be below the header */
+             right: 20px;
+             background: rgba(0, 0, 0, 0.8);
+             padding: 20px;
+             border-radius: 8px;
+             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+             z-index: 10; /* Ensure it's above other elements */
+             display: none; /* Hidden by default */
+             text-align: left;
+             width: 300px; /* Adjust width as needed */
+         }
+         .login-container label {
+             display: block;
+             margin-bottom: 5px;
+             font-size: 0.9em;
+         }
+         .login-container input[type="text"],
+         .login-container input[type="email"],
+         .login-container input[type="password"] {
+             width: calc(100% - 12px);
+             padding: 8px;
+             margin-bottom: 10px;
+             border: 1px solid #555;
+             border-radius: 4px;
+             background-color: #333;
+             color: white;
+             box-sizing: border-box;
+         }
+         .login-container button {
+             background: #ff9800;
+             color: white;
+             padding: 10px 15px;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 1em;
+             transition: background 0.3s ease;
+             width: 100%;
+         }
+         .login-container button:hover {
+             background: #e68900;
+         }
+         .login-link {
+             cursor: pointer;
+         }
+            </style>
+    </header>
+    <script>
+        anime({
+            targets: '#heading',
+            translateY: [-50, 0],
+            opacity: [0, 1],
+            duration: 1000,
+            easing: 'easeOutExpo'
+        });
+
+        function toggleChat() {
+            const chatPopup = document.getElementById("chat-popup");
+            chatPopup.style.display = chatPopup.style.display === "none" ? "block" : "none";
+        }
+
+        const responses = {
+            "investment options": "Invest in stocks, mutual funds, bonds, or real estate depending on your risk appetite.",
+            "best stock": "Stock recommendations vary. Consider blue-chip stocks for stability or growth stocks for potential high returns.",
+            "mutual funds": "Mutual funds pool money from investors to invest in diversified portfolios managed by professionals.",
+            "real estate": "Investing in real estate can provide long-term wealth through rental income and property appreciation."
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            const chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += <p><strong>You:</strong> ${userInput}</p>;
+
+            let response = responses[userInput] || "I'm not sure. Please ask about investments, stocks, or mutual funds.";
+            chatbox.innerHTML += <p><strong>Bot:</strong> ${response}</p>;
+            document.getElementById("user-input").value = "";
+        }
+
+        const investmentData = {
+            '2023': [50, 30, 10, 5, 5],
+            '2022': [40, 35, 15, 5, 5],
+            '2021': [45, 25, 20, 5, 5]
+        };
+
+        const ctx = document.getElementById('investmentChart').getContext('2d');
+        const investmentChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Stocks', 'Mutual Funds', 'Bonds', 'Real Estate', 'Crypto'],
+                datasets: [{
+                    label: 'Investment Distribution',
+                    data: investmentData['2023'],
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+    <header>
+        <style>
+            @keyframes gradientBackground {
+                0% { background: #009980; }
+                50% { background: #00b4cc; }
+                100% { background: #008f99; }
+            }
+
+            @keyframes textGlow {
+                0% { text-shadow: 0 0 5px #fff; }
+                50% { text-shadow: 0 0 20px #ffcc00; }
+                100% { text-shadow: 0 0 5px #fff; }
+            }
+            header {
+            padding: 30px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #chart-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #faq {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #faq h2 {
+            color: #b3e5fc;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-item {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            color: #e0f7fa;
+        }
+
+        .faq-item:hover {
+            background: #00695c;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #chatbot {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #chatbot h2 {
+            color: #b3e5fc;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        #chat-container {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat-container input {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #e0f7fa;
+        }
+
+        #chat-container input::placeholder {
+            color: #b3e5fc;
+        }
+
+        #chat-container button {
+            background: #ff9800;
+        }
+
+        #chat-container button:hover {
+            background: #f57c00;
+        }
+        </style>
+
+        <header>
+            <h1>Financial Advisor Chatbot</h1>
+        </header>
+        <main>
+            <section id="chart-section">
+                <img src="/image.png" width="300" height="300"  alt="loading">
+                <img src="/22.jpg" width="300" height="300"  alt="loading">
+                <img src="/hh.jpg" width="300" height="300"  alt="loading">
+                <img src="/ne.jpg" width="300" height="300"  alt="loading">
+            </section>
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">What is a certified financial advisor?</div>
+                <div class="faq-item">What is the role of a financial advisor?</div>
+                <div class="faq-item">How do financial consultants earn?</div>
+                <div class="faq-item">What does a digital financial planner do?</div>
+            </section>
+            <section id="chatbot">
+                <h2>Ask our Financial Chatbot</h2>
+                <div id="chat-container">
+                    <div id="chat-messages"></div>
+                    <input type="text" id="user-input" placeholder="Ask a financial question...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <h2>Certified Financial Advisors vs Planners vs Consultants: Which Do You Need?</h2>
+            <div class="comparison-table">
+                <div class="column">
+                    <h3>Certified Financial Advisor</h3>
+                    <p>Financial advisors offer a variety of services. It is a term much broader in scope.</p>
+                    <p>A financial advisor may or may not be certified.</p>
+                </div>
+                <div class="column">
+                    <h3>Certified Financial Planner</h3>
+                    <p>The main focus of a financial planner is to help you achieve short-, mid-, and long-term financial goals through detailed plans.</p>
+                    <p>A financial planner can be certified, like CFPs who gain certification by experience and passing exams set by the Financial Planning Standards Board.</p>
+                </div>
+                <div class="column">
+                    <h3>Certified Financial Consultant</h3>
+                    <p>Financial consultants offer highly specialized expert guidance that is more suited to the short term.</p>
+                    <p>A financial consultant may or may not be certified.</p>
+                </div>
+            </div>
+        </footer>
+    </header>
+
+    
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Financial Plans</h3>
+                <ul>
+                    <li>Financial Planning</li>
+                    <li>Investment Planning</li>
+                    <li>Goal Planning</li>
+                    <li>Risk Management</li>
+                    <li>Tax Saving And Planning</li>
+                    <li>Retirement Planning</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Investment Plans</h3>
+                <ul>
+                    <li>Mutual Funds</li>
+                    <li>SIP</li>
+                    <li>Income Returns</li>
+                    <li>Portfolio Management Services</li>
+                    <li>Gold</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Loan Hub</h3>
+                <ul>
+                    <li>Home Loan</li>
+                    <li>Personal Loan</li>
+                    <li>Business Loan</li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contact Info</h3>
+                <p>NCPL Tower 2nd Floor, A-4, A Block, Sector 9, Noida, Uttar Pradesh 201301</p>
+                <p>📞 +91-7247075470</p>
+                <p>📧 info@fincart.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="chatbot-icon" onclick="toggleChat()">💬</div>
+    <div id="chat-popup">
+        <div id="chatbox"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <style>
+    footer {
+            background: linear-gradient(45deg, #294e64, #1e3b4a);
+            color: #b3e5fc;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        footer h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-table {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .column {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            width: 30%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h3 {
+            color: #81d4fa;
+            margin-top: 0;
+            border-bottom: 2px solid #64b5f6;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .column p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Financial Advisors Section */
+        .financial-advisors {
+            padding: 50px 30px;
+            background: linear-gradient(45deg, #1565c0, #00897b); /* New gradient */
+            text-align: center;
+            color: #e0f7fa;
+        }
+
+        .financial-advisors .section-title {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .advisor-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+        }
+
+        .advisor-card {
+            width: calc(33% - 20px); /* Adjust width for spacing */
+            background: rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .advisor-card h3 {
+            color: #81d4fa;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4fc3f7;
+            padding-bottom: 10px;
+        }
+
+        .advisor-card p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Footer Bottom Section */
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(45deg, #1e3b4a, #0b2530); /* Darker footer */
+            color: #b3e5fc;
+            padding: 40px 30px;
+            transition: background 0.5s ease-in-out;
+            flex-wrap: wrap; /* Allow sections to wrap */
+        }
+
+        .footer-section {
+            width: calc(25% - 20px); /* Adjust width */
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            border-bottom: 2px solid #ffca28;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #fffde7;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+    </style>
+</body>
+</html>
