@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHABUCKS - AI Financial Assistant</title>
+    <link rel="stylesheet" href="alphabucks.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <img src="finassist logo.jpg" alt="ALPHABUCKS Logo" class="logo">
+        <h1>ALPHABUCKS</h1>
+        <p>Invest Like an Alpha, Earn Like a Boss</p>
+    </header>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="#" onclick="loadContent('index')">Home</a></li>
+            <li><a href="#" onclick="loadContent('marketdata')">Market Data</a></li>
+            <li><a href="#" onclick="loadContent('Invest')">Invest</a></li>
+            <li><a href="#" onclick="loadContent('Trade')">Trade</a></li>
+            <li><a href="#" onclick="loadContent('regulations')">Regulation</a></li>
+            <li><a href="#" onclick="loadContent('resources')">Resources</a></li>
+            <li><a href="#" onclick="loadContent('contact')">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div id="content">
+        <!-- Default Home Content -->
+        <div class="main-content">
+            <img src="img 1.jpg" alt="Financial Growth">
+            <img src="img 2.jpg" alt="Stock Market">
+            <img src="img 3.jpg" alt="Investments">
+            <img src="img 4.jpg" alt="Wealth Management">
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>Certified Financial Advisors vs Planners vs Consultants: Which Do You Need?</h2>
+        <div class="comparison-table">
+            <div class="column">
+                <h3>Certified Financial Advisor</h3>
+                <p>Financial advisors offer a variety of services. It is a term much broader in scope.</p>
+                <p>A financial advisor may or may not be certified.</p>
+            </div>
+            <div class="column">
+                <h3>Certified Financial Planner</h3>
+                <p>The main focus of a financial planner is to help you achieve short-, mid-, and long-term financial goals through detailed plans.</p>
+                <p>A financial planner can be certified, like CFPs who gain certification by experience and passing exams set by the Financial Planning Standards Board.</p>
+            </div>
+            <div class="column">
+                <h3>Certified Financial Consultant</h3>
+                <p>Financial consultants offer highly specialized expert guidance that is more suited to the short term.</p>
+                <p>A financial consultant may or may not be certified.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT ICON -->
+    <div class="chatbot-icon" onclick="toggleChat()">💬</div>
+
+    <!-- CHAT POPUP -->
+    <div id="chat-popup">
+        <div id="chatbox">
+            <p class="bot">Hello! How can I assist you with your financial queries?</p>
+        </div>
+        <input type="text" id="user-input" placeholder="Ask me anything..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="combined-script.js"></script>
+</body>
+</html>
