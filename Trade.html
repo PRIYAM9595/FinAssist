@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade - FinAssist</title>
+    <link rel="stylesheet" href="styles3.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="file3.js"></script>
+</head>
+<body>
+
+    <!-- HEADER SECTION -->
+    <header>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="market.html">📈 Market Data</a>
+            <a href="invest.html">💰 Investment</a>
+            <a href="trade.html" class="active">📊 Trading</a>
+            <button id="darkModeToggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- TRADING METHODS OVERVIEW -->
+    <section class="trading-section">
+        <h1>📊 Trading Techniques</h1>
+        <p>Explore different trading methods, risk management strategies, and stock market insights.</p>
+    </section>
+
+    <!-- POPULAR TRADING STRATEGIES -->
+    <div class="strategy-container">
+        <h2>🔥 Popular Trading Techniques</h2>
+        <ul>
+            <li>📈 <strong>Day Trading</strong> - Buy & sell stocks within a single day.</li>
+            <li>⏳ <strong>Swing Trading</strong> - Hold positions for days to capture trends.</li>
+            <li>📉 <strong>Scalping</strong> - Execute rapid trades for small profits.</li>
+            <li>🔮 <strong>Momentum Trading</strong> - Ride trends with strong volume.</li>
+            <li>🛡️ <strong>Risk Management</strong> - Stop-loss, diversification, and hedging.</li>
+        </ul>
+    </div>
+
+    <!-- TRADING PERFORMANCE CHART -->
+    <div class="chart-container">
+        <canvas id="tradingChart"></canvas>
+    </div>
+
+    <!-- TRADE PROFIT CALCULATOR -->
+    <div class="calculator">
+        <h2>💹 Trade Profit Calculator</h2>
+        <label for="buyPrice">💵 Buy Price (₹):</label>
+        <input type="number" id="buyPrice" placeholder="Enter buy price">
+
+        <label for="sellPrice">💰 Sell Price (₹):</label>
+        <input type="number" id="sellPrice" placeholder="Enter sell price">
+
+        <label for="quantity">📊 Quantity:</label>
+        <input type="number" id="quantity" placeholder="Enter quantity">
+
+        <button onclick="calculateProfit()">Calculate Profit</button>
+        <p id="profitResult"></p>
+    </div>
+
+</body>
+</html>
