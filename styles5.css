@@ -122,3 +122,27 @@ footer h2 {
 .comparison-table {
     display: flex;
     justify-content: space
+}
+    .regulation-section h3 {
+    cursor: pointer;
+    background: #0077b6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.regulation-section h3:hover {
+    background: #005f8a;
+}
+
+.regulation-section ul {
+    display: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.regulation-section ul.active {
+    display: block;
+}
+
