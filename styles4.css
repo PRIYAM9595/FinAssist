@@ -60,6 +60,7 @@ header p {
     color: #fff;
 }
 
+/* Contact Section */
 .contact-container {
     max-width: 800px;
     margin: 30px auto;
@@ -83,6 +84,7 @@ header p {
     margin-bottom: 30px;
 }
 
+/* Contact Details */
 .contact-details {
     display: flex;
     justify-content: space-around;
@@ -105,6 +107,7 @@ header p {
     color: #e0f7fa;
 }
 
+/* Contact Form */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -120,13 +123,16 @@ header p {
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
     color: #e0f7fa;
+    font-size: 1em;
 }
 
 .contact-form textarea {
     resize: vertical;
+    min-height: 100px;
 }
 
-.contact-form input::placeholder, .contact-form textarea::placeholder {
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
     color: #b3e5fc;
 }
 
@@ -134,13 +140,17 @@ header p {
     background: #ff9800;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .contact-form button:hover {
     background: #f57c00;
+    transform: scale(1.05);
 }
 
+/* Footer */
 footer {
     background: linear-gradient(45deg, #294e64, #1e3b4a);
     color: #b3e5fc;
@@ -156,5 +166,30 @@ footer h2 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.comparison-table {
-    display
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu li {
+        margin-bottom: 10px;
+    }
+
+    .contact-details {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .detail-item {
+        text-align: center;
+    }
+
+    .contact-form input, 
+    .contact-form textarea, 
+    .contact-form button {
+        max-width: 90%;
+    }
+}
