@@ -1,0 +1,124 @@
+/* styles/regulations.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1c3643, #275d7a);
+    color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: #fffde7;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2em;
+    color: #b3e5fc;
+}
+
+.logo {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+}
+
+.nav-menu li {
+    margin: 0 20px;
+}
+
+.nav-menu a {
+    color: #b3e5fc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #fff;
+}
+
+.regulations-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0f7fa;
+}
+
+.regulations-container h2 {
+    color: #fffde7;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.regulations-container p {
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.regulation-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.regulation-section h3 {
+    color: #81d4fa;
+    margin-bottom: 15px;
+}
+
+.regulation-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+regulation-section li {
+    line-height: 1.6;
+}
+
+footer {
+    background: linear-gradient(45deg, #294e64, #1e3b4a);
+    color: #b3e5fc;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.comparison-table {
+    display: flex;
+    justify-content: space
