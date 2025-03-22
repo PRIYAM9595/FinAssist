@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Fake Stock Data (Replace with API Later)
     const stockData = [
-        { company: "Reliance Industries", price: 2735, change: "+2.4%" },
-        { company: "HDFC Bank", price: 1620, change: "+1.8%" },
-        { company: "Infosys", price: 1430, change: "-0.9%" },
-        { company: "TCS", price: 3840, change: "+1.2%" },
-        { company: "HUL", price: 2425, change: "-1.5%" }
+        { company: "Reliance Industries", price: 1,277.50, change: "+0.66%" },
+        { company: "HDFC Bank", price: 1,772.50, change: "+0.21%" },
+        { company: "Infosys", price: 1,595.40, change: "-1.25%" },
+        { company: "TCS", price: 3,578.00, change: "+0.42%" },
+        { company: "HUL", price: 2,247.50, change: "+0.23%" }
     ];
 
     // Populate Stock Table
