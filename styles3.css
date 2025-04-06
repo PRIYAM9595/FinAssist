@@ -1,0 +1,196 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #222;  /* Changed to dark color for better visibility */
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+    transition: all 0.5s ease-in-out;
+    animation: backgroundAnimation 8s infinite alternate;
+}
+
+/* Background Animation */
+@keyframes backgroundAnimation {
+    0% { background: linear-gradient(120deg, #ff9a9e, #fad0c4); }
+    50% { background: linear-gradient(120deg, #fbc2eb, #a6c1ee); }
+    100% { background: linear-gradient(120deg, #84fab0, #8fd3f4); }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(120deg, #121212, #1e1e1e);
+    color: #fff;  /* Ensures text is visible in dark mode */
+}
+
+/* Header */
+header {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Navigation */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #fbc2eb;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+    margin-left: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#darkModeToggle:hover {
+    transform: rotate(180deg);
+}
+
+/* Sections */
+.trading-section, .investment-section {
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;  /* Ensures text visibility */
+    margin: 100px auto 20px;
+    width: 90%;
+    max-width: 850px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s forwards ease-in-out;
+}
+
+.trading-section:hover, .investment-section:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Strategy Container */
+.strategy-container {
+    background: white;
+    padding: 25px;
+    color: #333;  /* Ensures text is visible */
+    margin: 20px auto;
+    width: 85%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1.5s forwards;
+}
+
+.strategy-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Chart Styling */
+.chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+/* Calculator Styling */
+.calculator {
+    background: white;
+    padding: 30px;
+    color: #333;  /* Ensures text visibility */
+    margin: 40px auto;
+    width: 85%;
+    max-width: 550px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 2s forwards;
+}
+
+.calculator input {
+    width: 85%;
+    padding: 14px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 18px;
+    transition: border 0.3s;
+}
+
+.calculator input:focus {
+    border: 2px solid #007bff;
+    outline: none;
+}
+
+/* Buttons */
+.calculator button {
+    padding: 14px 22px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.calculator button:hover {
+    background-color: #0056b3;
+    transform: scale(1.08);
+}
+
+/* Result Styling */
+#result, #profitResult {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+}
+
+/* Hover Effects for Lists */
+.strategy-container ul li {
+    font-size: 18px;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.strategy-container ul li:hover {
+    transform: scale(1.05);
+    color: #007bff;
+}

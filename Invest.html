@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest - FinAssist</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="file2.js"></script>
+</head>
+<body>
+
+    <!-- HEADER SECTION -->
+    <header>
+        <nav>
+             <a href="index.html">🏠 Home</a>
+            <a href="marketdata.html">📈 Market Data</a>
+            <a href="Invest.html">💰 Investment</a>
+            <a href="Trade.html" class="active">📊 Trading</a>
+            <a href="https://www.investopedia.com/" target="_blank">Investopedia</a>
+            <a href="https://www.moneycontrol.com/" target="_blank">MoneyControl</a>
+            <button id="darkModeToggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- INVESTMENT OVERVIEW -->
+    <section class="investment-section">
+        <h1>📊 Investment Strategies</h1>
+        <p>Learn how to invest wisely, diversify your portfolio, and maximize returns.</p>
+    </section>
+
+    <!-- POPULAR STRATEGIES -->
+    <div class="strategy-container">
+        <h2>🚀 Popular Strategies</h2>
+        <ul>
+            <li>💹 <strong>Stock Market Investing</strong> - Invest in equity for high returns.</li>
+            <li>🏡 <strong>Real Estate Investments</strong> - Secure your future with properties.</li>
+            <li>🔗 <strong>Cryptocurrency & Blockchain</strong> - The future of digital assets.</li>
+            <li>📈 <strong>Mutual Funds & ETFs</strong> - Diversify with professional management.</li>
+            <li>💰 <strong>Fixed Deposits & Bonds</strong> - Low risk, steady income.</li>
+        </ul>
+    </div>
+
+    <!-- INVESTMENT CHART -->
+    <div class="chart-container">
+        <canvas id="investmentChart"></canvas>
+    </div>
+
+    <!-- INVESTMENT CALCULATOR -->
+    <div class="calculator">
+        <h2>🧮 Investment Calculator</h2>
+        <label for="amount">💵 Initial Investment (₹):</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <label for="rate">📊 Annual Interest Rate (%):</label>
+        <input type="number" id="rate" placeholder="Enter interest rate">
+
+        <label for="years">⏳ Investment Duration (Years):</label>
+        <input type="number" id="years" placeholder="Enter years">
+
+        <button onclick="calculateInvestment()">Calculate</button>
+        <p id="result"></p>
+    </div>
+
+</body>
+</html>
